@@ -10,6 +10,7 @@
   <body>
     <div class="page login" id='page-login'>
       <div class='logo'></div>
+	  <label for="user">Username</label>
       <input id='username'></input>
       <button id='login'>Proceed</button>
     </div>
@@ -28,9 +29,14 @@
     <div class="page game" id='page-game'>
       <button id='game-back'>Back</button>
       <button id='game-resign'>Resign</button>
-	  <button id='game-resign'>Take Back </button>
-      <div id='game-board' style="width: 400px">
+	  <button id='game-resign'>Take Back </button><br>
+	  <center><div id ="match"></div><div id="status"></div></center>
+      <div id='game-board' style="width: 400px"></div>
+	  <br><center>
+	  <label>Moves Played</label>
+	  <div id="pgn" style="width:100px"></div>
       </div>
+	  </center>
     </div>
 
     <script src="lib/socket.io-1.2.0.js"></script>

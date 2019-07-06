@@ -130,7 +130,10 @@
                         .text(user)
                         .on('click', function() {
                           socket.emit('invite',  user);
-                        }));
+						  var usi=username +""+ "vs" +""+ user;
+		  $('#match').append($('<h1>')
+                        .text(usi));
+                        })).addClass('userclass');
         });
       };
            
@@ -153,7 +156,9 @@
                
           game = serverGame.board ? new Chess(serverGame.board) : new Chess();
           board = new ChessBoard('game-board', cfg);
+		  
       }
+	 
        
       // do not pick up pieces if the game is over
       // only pick up pieces for the side to move
@@ -165,6 +170,7 @@
           return false;
         }
       };  
+	  
       
     
       
@@ -182,9 +188,41 @@
         } else {
            socket.emit('move', {move: move, gameId: serverGame.id, board: game.fen()});
         }
-      
+       updateStatus();
       };
-      
+      function updateStatus () {
+  var status = ''
+
+  var moveColor = 'White'
+  if (game.turn() === 'b') {
+    moveColor = 'Black'
+  }
+
+  // checkmate?
+  if (game.in_checkmate()) {
+    status = 'Game over, ' + moveColor + ' is in checkmate.'
+  }
+
+  // draw?
+  else if (game.in_draw()) {
+    status = 'Game over, drawn position'
+  }
+
+  // game still on
+  else {
+    status = moveColor + ' to move'
+
+    // check?
+    if (game.in_check()) {
+      status += ', ' + moveColor + ' is in check'
+    }
+  }
+
+  $('#status').html(status)
+ // $fen.html(game.fen())
+// socket.emit('pgn',  game.pgn());
+  $('#pgn').html(game.pgn())
+}
       // update the board position after the piece snap 
       // for castling, en passant, pawn promotion
       var onSnapEnd = function() {

@@ -5,6 +5,7 @@ body {
 	flex-flow: column;
 	align-content: center;
 	align-items: center;
+	
 }
 
 .page {
@@ -87,5 +88,11 @@ body {
 }
 
 .circle.offline {
-	background-color: yellow;
+	background-color: darkgreen;
+}
+.userclass{
+	font-size:1.3em;
+	font-family:Arial;
+	color:red;
+	font-weight:600;
 }
