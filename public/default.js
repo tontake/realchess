@@ -130,8 +130,8 @@
                         .text(user)
                         .on('click', function() {
                           socket.emit('invite',  user);
-						  var usi=username +""+ "vs" +""+ user;
-		  $('#match').append($('<h1>')
+						  var usi=username +" " + "vs" + " " + user;
+		  $('#match').append($('<h3>')
                         .text(usi));
                         })).addClass('userclass');
         });
