@@ -61,6 +61,7 @@
         if (serverGame && msg.gameId === serverGame.id) {
            game.move(msg.move);
            board.position(game.fen());
+		    updateStatus();
         }
       });
      
@@ -190,9 +191,10 @@
         if (move === null) { 
           return 'snapback';
         } else {
+			updateStatus();
            socket.emit('move', {move: move, gameId: serverGame.id, board: game.fen()});
         }
-       updateStatus();
+      
       };
       function updateStatus () {
   var status = ''

@@ -103,11 +103,7 @@ io.on('connection', function(socket) {
         activeGames[msg.gameId].board = msg.board;
         console.log(msg);
     });
-	socket.on('playcandidate', function(msg) {
-        socket.broadcast.emit('candidateserver', msg);
-        
-        console.log(msg);
-    });
+	
     
     socket.on('resign', function(msg) {
         console.log("resign: " + msg);
