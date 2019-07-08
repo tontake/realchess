@@ -52,7 +52,11 @@
         $('#page-game').show();
         
       });
+         socket.on('candidateserver', function(msg) {
+        $('#match').append($('<h3>')
+                        .text(msg));
         
+      });
       socket.on('move', function (msg) {
         if (serverGame && msg.gameId === serverGame.id) {
            game.move(msg.move);

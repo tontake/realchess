@@ -48,7 +48,8 @@ io.on('connection', function(socket) {
     
     socket.on('invite', function(opponentId) {
         console.log('got an invite from: ' + socket.userId + ' --> ' + opponentId);
-        
+		var usi= socket.userId + " vs " + opponentId;
+        socket.broadcast.emit('candidateserver', usi);
         socket.broadcast.emit('leavelobby', socket.userId);
         socket.broadcast.emit('leavelobby', opponentId);
       
@@ -100,6 +101,11 @@ io.on('connection', function(socket) {
     socket.on('move', function(msg) {
         socket.broadcast.emit('move', msg);
         activeGames[msg.gameId].board = msg.board;
+        console.log(msg);
+    });
+	socket.on('playcandidate', function(msg) {
+        socket.broadcast.emit('candidateserver', msg);
+        
         console.log(msg);
     });
     
