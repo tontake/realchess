@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="/default.css" />
   </head>
   <body>
-    <div class="page login" id='page-login'>
+    <h3 class="mantra"> THE <span id ="home-span">HOME </span>OF CHESS <span id ="push-span">PUSH</span> WORKS</h3>
+    <center>
+	<div class="page login" id='page-login'>
       <div class='logo'></div>
 	  <label for="user">Username</label>
       <input id='username'></input>
@@ -26,24 +28,92 @@
          No users online
       </div>
     </div>
+	</center>
+	
     <div class="page game" id='page-game'>
       <button id='game-back'>Back</button>
       <button id='game-resign'>Resign</button>
 	  <button id='game-resign'>Take Back </button><br>
+	  
+	  <div id ="timer"style=" display: inline-block; "><div id="output"><h4>WHITE</h4>
+       </div>
+
+<button id="startPause" onclick="startPause()">Start Clock</button>
+
+</div>
+<div id ="timer"style=" display: inline-block; margin-left:10px; "><div id="output"><h4>BLACK</h4>
+       </div>
+
+<button id="startPause" onclick="startPause()">Start Clock</button>
+
+</div>
+
 	  <center><div id ="match"></div><div id="status"></div></center><br>
+	  
       <div id='game-board' style="width: 400px"></div>
-	  <br>
+	  
 	  <label>Moves Played</label>
 	  <div id="pgn" style="width: 400px"></div>
       </div>
 	  
     </div>
-
+    
     <script src="lib/socket.io-1.2.0.js"></script>
     <script src="lib/jquery-1.11.1.js"></script>
     <script src="lib/WinJS.4.0/js/WinJS.min.js"></script>
     <script src="lib/chess.min.js"></script> 
     <script src="lib/chessboard-0.3.0.min.js"></script> 
     <script src="/default.js"></script>
+	<script type="text/javascript">
+
+var time = 60;
+var running = 0;
+var mins=10;
+function startPause(){
+	if(running == 0){
+		running = 1;
+		increment();
+		document.getElementById("startPause").innerHTML = "Pause";
+	}else{
+		running = 0;
+		document.getElementById("startPause").innerHTML = "Resume";
+	}
+};
+
+function reset(){
+	running = 0;
+	time = 0;
+	document.getElementById("output").innerHTML = "10:00";
+	document.getElementById("startPause").innerHTML = "Start";
+};
+
+function increment(){
+	if(running == 1){
+	  
+		setTimeout(function(){
+			time--;
+			var tenths = Math.floor(time % 60);
+			//var mins = Math.floor(time / 60);
+			if(tenths<=0){
+			   
+			   mins--;
+				mins = "0" + mins;
+				time=60;
+				
+			}
+			
+			if(tenths >= 0){
+			  if(tenths<10){
+				tenths = "0" + tenths;
+				
+				}
+			}
+			document.getElementById("output").innerHTML = mins + ":" + tenths;
+			increment();
+		}, 1000);
+	}
+};
+
+</script>
   </body>
 </html>
