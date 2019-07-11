@@ -25,6 +25,9 @@ io.on('connection', function(socket) {
     socket.on('login', function(userId) {
        doLogin(socket, userId);
     });
+	socket.on('chat message', function(msg){
+    io.emit('reply message', msg);
+  });
 
     function doLogin(socket, userId) {
         socket.userId = userId;  

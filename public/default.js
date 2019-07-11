@@ -24,6 +24,19 @@ var blackSquareGrey = '#696969'
             myGames = msg.games;
             updateGamesList();
       });
+	  // the chat handlers
+	  $('form').submit(function(){
+          socket.emit('chat message', $('#m').val());
+          $('#m').val('');
+          return false;
+        });
+		
+        socket.on('reply message', function(msg){
+          
+		  
+		  $('#messages').append($('<p>').text(msg));
+          window.scrollTo(0, document.body.scrollHeight);
+        });
       
       socket.on('joinlobby', function (msg) {
         addUser(msg);

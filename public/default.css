@@ -9,6 +9,18 @@ body {
 	
 }
 
+#messages{
+	background-color:#fff;
+	border-radius:10px;
+    font-weight:500px;
+	font-size:13px;
+	padding:10px;
+	
+}
+bo-label{
+font-weight:500px;
+	font-size:13px;	
+}
 .mantra{
 	text-align:center;
 	color:darkgreen;
@@ -139,3 +151,6 @@ body {
 #h4f{
 	font-weight:600;
 }
+form { background: gray; padding: 3px; position: relative; top: 3px; width: 90%; }
+      form input { border: 0; padding: 10px; width: 30%; margin-right: .5%; }
+      form button { width: 4%; background: rgb(130, 224, 255)!important; border: none; padding: 10px; }
